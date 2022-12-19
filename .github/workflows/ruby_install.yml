@@ -1,0 +1,13 @@
+name: Installing Ruby
+on: [push]
+jobs:
+  Installing-Ruby:
+    runs-on: ubuntu-20.04
+    steps:
+     - uses: actions/checkout@v3
+     - uses: ruby/setup-ruby@v1
+       with:
+         ruby-version: '3.0'
+         bundler-cache: true
+     - run: bundle exec rake
+  
