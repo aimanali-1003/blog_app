@@ -1,0 +1,8 @@
+name: Rubocop Offenses
+run-name: ${{ github.actor }} is testing out Rubocop
+on: [push]
+jobs:
+  Checking-rubocop-offenses:
+    runs-on: ubuntu-20.04
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
