@@ -1,15 +1,37 @@
-name: Linters
+name: CodeReview
+on:
+  pull_request:
+    branches:
+      - develop
 
-on: [push]
-
+permissions:
+  contents: read
+  pull-requests: write
 jobs:
-  build:
+  codereview:
+    name: Reviewdog
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: RuboCop Linter
-        uses: andrewmcodes/rubocop-linter-action@v3.3.0
+      - name: Setup Code
+        uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
         with:
-          action_config_path: ".github/config/rubocop_linter_action.yml" # Note: this is the default location
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ruby-version: 3.1.2
+
+      - name: rubocop
+        uses: reviewdog/action-rubocop@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          rubocop_version: gemfile
+          rubocop_extensions: rubocop-rails:gemfile rubocop-rspec:gemfile
+
+      - name: brakeman
+        uses: reviewdog/action-brakeman@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          brakeman_version: gemfile
+
+      - name: fasterer
+        uses: vk26/action-fasterer@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
