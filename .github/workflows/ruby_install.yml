@@ -11,6 +11,4 @@ jobs:
         with:
           ruby-version: 2.7.6
       - run: bundle install
-      - name: Rubocop
-        run: rubocop
   
