@@ -1,0 +1,20 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/home/dev/blog_app/app/controllers/articles_controller.rb": {
+        "lines": [
+          1,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1671520617
+  }
+}
