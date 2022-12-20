@@ -41,8 +41,6 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
-  config.include Devise::Test::ControllerHelpers, type: :controller
-  config.include Warden::Test::Helpers
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
