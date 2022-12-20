@@ -1,18 +1,17 @@
-name: Rubocop
+# Worflow example
+name: Run rubocop
 on: [push]
 
 jobs:
-  rubocop-offenses:
+  run-rubocop-tests:
     runs-on: ubuntu-20.04
     steps:
-      - name: Setup Code
-        uses: actions/checkout@v3
-      - uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7.6
-
-      - name: rubocop
-        uses: reviewdog/action-rubocop@v2
-        with:
-          rubocop_version: gemfile
-          rubocop_extensions: rubocop-rails:gemfile rubocop-rspec:gemfile
+          bundler-cache: true
+      - name: Run rubocop
+        run: |
+          bundle exec rubocop
