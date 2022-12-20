@@ -1,15 +1,17 @@
 # Worflow example
-name: CI
+name: Run rubocop
 on: [push]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  run-rubocop-tests:
+    runs-on: ubuntu-20.04
     steps:
-
-    - uses: actions/checkout@v1
-
-
-    - uses: luizfonseca/github-actions-rubocop@1.5.6
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.6
+          bundler-cache: true
+      - name: Run rubocop
+        run: |
+          bundle exec rubocop
